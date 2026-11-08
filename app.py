@@ -1,11 +1,10 @@
 import os
-import re
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request, send_from_directory
 import yt_dlp
 
 app = Flask(__name__)
-DOWNLOAD_FOLDER = os.path.join(os.getcwd(), 'downloads')
 
+DOWNLOAD_FOLDER = 'downloads'
 if not os.path.exists(DOWNLOAD_FOLDER):
     os.makedirs(DOWNLOAD_FOLDER)
 
@@ -14,30 +13,35 @@ def index():
     if request.method == 'POST':
         url = request.form.get('url')
         if not url:
-            return render_template('index.html', error="Please enter a valid TikTok URL!")
-        
-        # yt-dlp config with a clean output template to avoid special character issues
-        ydl_opts = {
-            'outtmpl': os.path.join(DOWNLOAD_FOLDER, '%(id)s.%(ext)s'),
-            'format': 'best',
-        }
+            return render_template('index.html', error="Please enter a valid TikTok URL.")
         
         try:
+            # yt-dlp options configured to bypass restrictions
+            ydl_opts = {
+                'outtmpl': os.path.join(DOWNLOAD_FOLDER, '%(id)s.%(ext)s'),
+                'format': 'best',
+                'noplaylist': True,
+                'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'referer': 'https://www.tiktok.com/',
+            }
+            
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-                info_dict = ydl.extract_info(url, download=True)
-                filename = ydl.prepare_filename(info_dict)
-                basename = os.path.basename(filename)
+                info = ydl.extract_info(url, download=True)
+                filename = f"{info.get('id')}.{info.get('ext')}"
                 
-            return render_template('index.html', success=True, filename=basename)
+            return render_template('index.html', success=True, filename=filename)
         except Exception as e:
-            return render_template('index.html', error=f"Download failed: {str(e)}")
+            error_message = str(e)
+            # Clean up error message for user friendly display
+            if "Unsupported URL" in error_message:
+                error_message = "Invalid TikTok link. Please check the URL and try again."
+            return render_template('index.html', error=f"Download failed: {error_message}")
             
     return render_template('index.html')
 
 @app.route('/download/<filename>')
 def download_file(filename):
-    file_path = os.path.join(DOWNLOAD_FOLDER, filename)
-    return send_file(file_path, as_attachment=True)
+    return send_from_directory(DOWNLOAD_FOLDER, filename, as_attachment=True)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True)
