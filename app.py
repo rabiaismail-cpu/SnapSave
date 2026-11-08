@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template, request, send_from_directory
-import yt_dlp
+import requests
 
 app = Flask(__name__)
 
@@ -16,34 +16,30 @@ def index():
             return render_template('index.html', error="Please enter a valid TikTok URL.")
         
         try:
-            # Advanced yt-dlp options for cloud servers
-            ydl_opts = {
-                'outtmpl': os.path.join(DOWNLOAD_FOLDER, '%(id)s.%(ext)s'),
-                'format': 'best',
-                'noplaylist': True,
-                'socket_timeout': 30,
-                'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-                'referer': 'https://www.tiktok.com/',
-                'extractor_args': {
-                    'tiktok': {
-                        'app_version': ['30.2.0'],
-                        'manifest_app_version': ['30.2.0'],
-                    }
-                }
-            }
+            # Using a reliable public TikTok API endpoint to bypass IP blocking
+            api_url = f"https://tikwm.com/api/?url={url}"
+            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
+            response = requests.get(api_url, headers=headers)
+            data = response.json()
             
-            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-                info = ydl.extract_info(url, download=True)
-                filename = f"{info.get('id')}.{info.get('ext')}"
+            if data.get('code') == 0:
+                video_url = data['data']['play']
+                video_id = data['data']['id']
                 
-            return render_template('index.html', success=True, filename=filename)
-        except Exception as e:
-            error_message = str(e)
-            if "Unsupported URL" in error_message:
-                error_message = "Invalid TikTok link. Please check the URL and try again."
+                # Download video file locally
+                video_response = requests.get(video_url, headers=headers)
+                filename = f"{video_id}.mp4"
+                file_path = os.path.join(DOWNLOAD_FOLDER, filename)
+                
+                with open(file_path, 'wb') as f:
+                    f.write(video_response.content)
+                    
+                return render_template('index.html', success=True, filename=filename)
             else:
-                error_message = "TikTok is blocking cloud requests. Please try another video link."
-            return render_template('index.html', error=f"Download failed: {error_message}")
+                return render_template('index.html', error="Download failed: Invalid TikTok link or video is private.")
+                
+        except Exception as e:
+            return render_template('index.html', error=f"Download failed: Server connection error.")
             
     return render_template('index.html')
 
