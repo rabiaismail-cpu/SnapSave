@@ -16,13 +16,20 @@ def index():
             return render_template('index.html', error="Please enter a valid TikTok URL.")
         
         try:
-            # yt-dlp options configured to bypass restrictions
+            # Advanced yt-dlp options for cloud servers
             ydl_opts = {
                 'outtmpl': os.path.join(DOWNLOAD_FOLDER, '%(id)s.%(ext)s'),
                 'format': 'best',
                 'noplaylist': True,
-                'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'socket_timeout': 30,
+                'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
                 'referer': 'https://www.tiktok.com/',
+                'extractor_args': {
+                    'tiktok': {
+                        'app_version': ['30.2.0'],
+                        'manifest_app_version': ['30.2.0'],
+                    }
+                }
             }
             
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -32,9 +39,10 @@ def index():
             return render_template('index.html', success=True, filename=filename)
         except Exception as e:
             error_message = str(e)
-            # Clean up error message for user friendly display
             if "Unsupported URL" in error_message:
                 error_message = "Invalid TikTok link. Please check the URL and try again."
+            else:
+                error_message = "TikTok is blocking cloud requests. Please try another video link."
             return render_template('index.html', error=f"Download failed: {error_message}")
             
     return render_template('index.html')
