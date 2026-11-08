@@ -16,18 +16,18 @@ def index():
             return render_template('index.html', error="Please enter a valid TikTok URL.")
         
         try:
-            # Using a reliable public TikTok API endpoint to bypass IP blocking
             api_url = f"https://tikwm.com/api/?url={url}"
-            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
-            response = requests.get(api_url, headers=headers)
+            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+            
+            # Added timeout to prevent hanging
+            response = requests.get(api_url, headers=headers, timeout=15)
             data = response.json()
             
             if data.get('code') == 0:
                 video_url = data['data']['play']
                 video_id = data['data']['id']
                 
-                # Download video file locally
-                video_response = requests.get(video_url, headers=headers)
+                video_response = requests.get(video_url, headers=headers, timeout=15)
                 filename = f"{video_id}.mp4"
                 file_path = os.path.join(DOWNLOAD_FOLDER, filename)
                 
@@ -39,7 +39,8 @@ def index():
                 return render_template('index.html', error="Download failed: Invalid TikTok link or video is private.")
                 
         except Exception as e:
-            return render_template('index.html', error=f"Download failed: Server connection error.")
+            # Yeh line exact error screen par dikhaye gi taake pata chalay asal waja kya hai
+            return render_template('index.html', error=f"Error details: {str(e)}")
             
     return render_template('index.html')
 
