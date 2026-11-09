@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SnapSave - Instant TikTok Video Downloader</title>
+    <title>SnapSave - Free TikTok Video Downloader Without Watermark</title>
+    <meta name="description" content="Use our free tiktok video downloader to download video tiktok without watermark, convert tiktok mp3, and save clips instantly in HD quality.">
+    <meta name="keywords" content="download video tiktok, tiktok downloader, mp3 tiktok, download video tt, tiktok mp3, tiktok video download, tiktok video downloader, tiktok download video, tiktok video download without watermark">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-950 text-white min-h-screen flex flex-col justify-between font-sans">
@@ -24,14 +26,14 @@
     <main class="flex-grow flex flex-col items-center justify-center px-4 py-12">
         <div class="text-center max-w-2xl mb-10">
             <div class="inline-block mb-4 px-4 py-1.5 rounded-full border border-pink-500/30 bg-pink-500/10 text-pink-400 text-xs font-semibold tracking-wide uppercase">
-                ✨ No Watermark • HD Quality • Mobile Friendly
+                ✨ TikTok Video Download Without Watermark
             </div>
             <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4">
-                Download TikTok Videos <br>
-                <span class="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent">Instantly</span>
+                Free TikTok Video Downloader <br>
+                <span class="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent">Instant & HD</span>
             </h1>
             <p class="text-slate-400 text-sm md:text-base">
-                Paste your TikTok link below to download high-resolution videos without watermarks within seconds on any device.
+                Looking for the best <strong>tiktok video downloader</strong>? Paste your link below to <strong>download video tiktok</strong>, save <strong>tiktok mp3</strong>, and get clips without watermarks in seconds.
             </p>
         </div>
 
@@ -50,7 +52,7 @@
                 
                 <button type="submit" id="submitBtn"
                         class="w-full py-4 bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 hover:from-pink-500 hover:to-indigo-500 text-white font-bold rounded-2xl shadow-lg shadow-purple-600/30 transition-all transform active:scale-[0.99] flex items-center justify-center gap-2">
-                    <span>⬇️</span> Download Video
+                    <span>⬇️</span> Download Video TikTok
                 </button>
             </form>
 
@@ -81,28 +83,29 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mt-16 w-full px-4">
             <div class="bg-slate-900/40 border border-slate-800/60 p-6 rounded-2xl text-center">
                 <div class="text-pink-500 text-2xl mb-3">⚡</div>
-                <h3 class="font-bold text-slate-200 mb-1">Fast Download</h3>
-                <p class="text-xs text-slate-400">High-speed server fetching lets you download clips in seconds without lagging.</p>
+                <h3 class="font-bold text-slate-200 mb-1">Fast TikTok Download</h3>
+                <p class="text-xs text-slate-400">Quickly process your download video tt requests without any delay.</p>
             </div>
             <div class="bg-slate-900/40 border border-slate-800/60 p-6 rounded-2xl text-center">
                 <div class="text-purple-500 text-2xl mb-3">💻</div>
-                <h3 class="font-bold text-slate-200 mb-1">HD Quality</h3>
-                <p class="text-xs text-slate-400">Original video quality is preserved completely with no compression loss.</p>
+                <h3 class="font-bold text-slate-200 mb-1">HD & Audio Support</h3>
+                <p class="text-xs text-slate-400">Best tool for tiktok video download without watermark and sound extraction.</p>
             </div>
             <div class="bg-slate-900/40 border border-slate-800/60 p-6 rounded-2xl text-center">
                 <div class="text-indigo-500 text-2xl mb-3">🛡️</div>
                 <h3 class="font-bold text-slate-200 mb-1">Free & Unlimited</h3>
-                <p class="text-xs text-slate-400">Download as many videos as you want completely free without restrictions.</p>
+                <p class="text-xs text-slate-400">Use our tiktok downloader completely free on mobile and PC.</p>
             </div>
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="py-6 text-center text-xs text-slate-500 border-t border-slate-800/60">
-        &copy; 2026 SnapSave. All rights reserved. Built with Flask & Tailwind CSS.
+    <!-- Footer SEO text -->
+    <footer class="py-6 text-center text-xs text-slate-500 border-t border-slate-800/60 space-y-2">
+        <p>&copy; 2026 SnapSave. All rights reserved. Your ultimate TikTok video downloader tool.</p>
+        <p class="text-slate-600 max-w-xl mx-auto px-4">Tags: download video tiktok, tiktok downloader, mp3 tiktok, download video tt, tiktok mp3, tiktok video download, tiktok downloader.</p>
     </footer>
 
-    <!-- JavaScript for Client-Side API Fetching (Bypasses Cloudflare) -->
+    <!-- JavaScript for Client-Side API Fetching -->
     <script>
         const form = document.getElementById('downloadForm');
         const urlInput = document.getElementById('urlInput');
@@ -119,7 +122,6 @@
             const url = urlInput.value.trim();
             if (!url) return;
 
-            // Reset UI
             errorBox.classList.add('hidden');
             resultBox.classList.add('hidden');
             submitBtn.disabled = true;
@@ -148,7 +150,7 @@
                 errorBox.classList.remove('hidden');
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = `<span>⬇️</span> Download Video`;
+                submitBtn.innerHTML = `<span>⬇️</span> Download Video TikTok`;
             }
         });
     </script>
