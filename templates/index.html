@@ -25,18 +25,26 @@
     }
     </script>
 </head>
-<body class="bg-slate-950 text-white min-h-screen flex flex-col justify-between font-sans selection:bg-pink-500 selection:text-white">
+<body class="bg-[#090d16] text-slate-100 min-h-screen flex flex-col justify-between font-sans selection:bg-pink-500 selection:text-white relative overflow-x-hidden">
+
+    <!-- Background Glow Effects -->
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-pink-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
     <!-- Header / Navbar -->
-    <header class="py-6 px-8 flex justify-between items-center border-b border-slate-800/60 bg-slate-950/80 sticky top-0 z-50 backdrop-blur-md">
+    <header class="py-5 px-6 md:px-12 flex justify-between items-center border-b border-slate-800/80 bg-[#090d16]/90 sticky top-0 z-50 backdrop-blur-xl">
         <div class="flex items-center space-x-2">
             <span class="bg-gradient-to-r from-pink-500 to-purple-600 p-2 rounded-xl text-xl font-black shadow-lg shadow-pink-500/20">⚡</span>
-            <span class="text-2xl font-bold tracking-wider bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">SnapSave</span>
+            <span class="text-2xl font-extrabold tracking-wider bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">SnapSave</span>
         </div>
-        <div class="hidden md:flex space-x-6 text-sm text-slate-400 font-medium">
-            <span class="flex items-center gap-1.5">🛡️ 100% Safe</span>
-            <span class="flex items-center gap-1.5">⚡ Lightning Fast</span>
-            <span class="flex items-center gap-1.5">💎 HD Quality</span>
+        <nav class="hidden md:flex space-x-6 text-sm text-slate-400 font-medium">
+            <a href="#hero" class="hover:text-pink-400 transition-colors">Home</a>
+            <a href="#features" class="hover:text-pink-400 transition-colors">Features</a>
+            <a href="#about" class="hover:text-pink-400 transition-colors">About Us</a>
+            <a href="#privacy" class="hover:text-pink-400 transition-colors">Privacy Policy</a>
+        </nav>
+        <div class="hidden md:flex items-center space-x-4 text-xs font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-full">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Online & Active
         </div>
     </header>
 
@@ -44,7 +52,7 @@
     <main class="flex-grow">
         
         <!-- Hero Section & Downloader Tool -->
-        <section class="flex flex-col items-center justify-center px-4 pt-16 pb-20">
+        <section id="hero" class="flex flex-col items-center justify-center px-4 pt-16 pb-20 relative z-10">
             <div class="text-center max-w-3xl mb-10">
                 <div class="inline-block mb-4 px-4 py-1.5 rounded-full border border-pink-500/30 bg-pink-500/10 text-pink-400 text-xs font-semibold tracking-wide uppercase shadow-sm">
                     ✨ Ultimate TikTok Video Download Without Watermark
@@ -59,7 +67,7 @@
             </div>
 
             <!-- Downloader Box -->
-            <div class="w-full max-w-xl bg-slate-900/90 backdrop-blur-2xl border border-slate-800 p-6 md:p-8 rounded-3xl shadow-2xl shadow-purple-500/10 relative">
+            <div class="w-full max-w-xl bg-slate-900/80 backdrop-blur-2xl border border-slate-800/80 p-6 md:p-8 rounded-3xl shadow-2xl shadow-purple-500/10 relative">
                 
                 <form id="downloadForm" class="space-y-4">
                     <div class="relative">
@@ -72,7 +80,7 @@
                     </div>
                     
                     <button type="submit" id="submitBtn"
-                            class="w-full py-4 bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 hover:from-pink-500 hover:to-indigo-500 text-white font-bold rounded-2xl shadow-lg shadow-purple-600/30 transition-all transform active:scale-[0.99] flex items-center justify-center gap-2 text-base">
+                            class="w-full py-4 bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 hover:from-pink-500 hover:to-indigo-500 text-white font-bold rounded-2xl shadow-lg shadow-purple-600/30 transition-all transform active:scale-[0.99] flex items-center justify-center gap-2 text-base cursor-pointer">
                         <span>⬇️</span> Download Video TikTok
                     </button>
                 </form>
@@ -102,7 +110,7 @@
         </section>
 
         <!-- Features Section -->
-        <section class="max-w-6xl mx-auto px-4 py-12 border-t border-slate-900">
+        <section id="features" class="max-w-6xl mx-auto px-4 py-16 border-t border-slate-900/80">
             <div class="text-center mb-12">
                 <h2 class="text-2xl md:text-4xl font-bold mb-3">Why Choose Our <span class="text-pink-500">TikTok Downloader</span>?</h2>
                 <p class="text-slate-400 text-sm md:text-base max-w-xl mx-auto">Discover why millions of users trust SnapSave for their daily tiktok video download needs.</p>
@@ -127,8 +135,8 @@
             </div>
         </section>
 
-        <!-- Detailed Guide & SEO Content Section (Long-form content for Google ranking) -->
-        <section class="max-w-4xl mx-auto px-4 py-16 border-t border-slate-900 text-slate-300 space-y-8">
+        <!-- Detailed Guide & FAQs -->
+        <section class="max-w-4xl mx-auto px-4 py-16 border-t border-slate-900/80 text-slate-300 space-y-8">
             <div class="space-y-4">
                 <h2 class="text-2xl md:text-3xl font-bold text-white">How to Use the Best TikTok Video Downloader</h2>
                 <p class="text-sm md:text-base leading-relaxed text-slate-400">
@@ -159,6 +167,35 @@
                     <h3 class="font-semibold text-white text-base">How to extract audio or convert tiktok mp3?</h3>
                     <p class="text-sm text-slate-400 leading-relaxed">Our advanced extraction engine supports high-speed download video tt formats, giving you the best quality music tracks instantly.</p>
                 </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="max-w-4xl mx-auto px-4 py-16 border-t border-slate-900/80 text-slate-300 space-y-6">
+            <h2 class="text-2xl md:text-3xl font-bold text-white">About Us</h2>
+            <p class="text-sm md:text-base leading-relaxed text-slate-400">
+                Welcome to <strong>SnapSave</strong>, your premier destination for fast, reliable, and high-quality digital media utilities. We understand how important it is to keep your favorite social media moments accessible offline without annoying watermarks or intrusive limitations. 
+            </p>
+            <p class="text-sm md:text-base leading-relaxed text-slate-400">
+                Our mission is to provide a clean, secure, and lightning-fast web application that serves creators, students, and entertainment lovers worldwide. Built with cutting-edge web technologies, SnapSave guarantees seamless performance across all mobile phones, tablets, and desktop computers.
+            </p>
+        </section>
+
+        <!-- Privacy Policy Section -->
+        <section id="privacy" class="max-w-4xl mx-auto px-4 py-16 border-t border-slate-900/80 text-slate-300 space-y-6">
+            <h2 class="text-2xl md:text-3xl font-bold text-white">Privacy Policy</h2>
+            <p class="text-sm md:text-base leading-relaxed text-slate-400">
+                At SnapSave, accessible from our web platform, your privacy is extremely important to us. This Privacy Policy document outlines the types of information we collect and how we utilize it.
+            </p>
+            <div class="space-y-3 text-sm text-slate-400">
+                <h3 class="font-semibold text-white text-base">1. Information We Do Not Store</h3>
+                <p class="leading-relaxed">We do not store downloaded videos, user search queries, or personal files on our servers. All video processing occurs securely and dynamically through client-side requests and external APIs.</p>
+                
+                <h3 class="font-semibold text-white text-base pt-2">2. Log Files & Analytics</h3>
+                <p class="leading-relaxed">Like many standard websites, we use log files to record visitor interactions for site maintenance and traffic optimization. The information inside log files includes IP addresses, browser types, internet service providers (ISPs), and timestamps.</p>
+                
+                <h3 class="font-semibold text-white text-base pt-2">3. Third-Party Advertisements</h3>
+                <p class="leading-relaxed">To maintain our services completely free of charge, we may display third-party advertisements and banner links. These networks may use cookies to serve relevant ads based on your visit history.</p>
             </div>
         </section>
 
